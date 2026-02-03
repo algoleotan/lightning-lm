@@ -2,13 +2,24 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build ROS2",
+            "label": "Build ROS2 Release",
             "type": "shell",
-            "command": "${workspaceFolder}/build-ros2.sh",
+            "command": "${workspaceFolder}/build-ros2-release.sh",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build ROS2 Debug",
+            "type": "shell",
+            "command": "${workspaceFolder}/build-ros2-debug.sh",
+            "group": "build",
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"

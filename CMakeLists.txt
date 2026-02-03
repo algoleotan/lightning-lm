@@ -7,17 +7,26 @@ if (NOT CMAKE_CXX_STANDARD)
     set(CMAKE_CXX_STANDARD 17)
 endif ()
 
-# set to release by default
-set(CMAKE_BUILD_TYPE Release)
+# Default to Release if not specified
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release)
+endif()
 
 # -------------------------------------------------------------
 # 导入第三方库，同时做一些全局编译选项配置
 add_definitions("-DPCL_NO_PRECOMPILE")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fopenmp -fPIC -g")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2 -fopenmp -fPIC -g -ggdb")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -ggdb -g -fopenmp -fPIC -g")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC -g")
+# 基础编译选项
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -fopenmp")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+
+# Release 编译选项：优化 + 调试符号
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -g")
+set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG -g")
+
+# Debug 编译选项：无优化 + 完整调试符号
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -ggdb -DDEBUG")
+set(CMAKE_C_FLAGS_DEBUG "-O0 -g -ggdb -DDEBUG")
 
 
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
