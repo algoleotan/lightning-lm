@@ -2,7 +2,78 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run SLAM Offline",
+            "name": "Debug SLAM Offline",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/../../install/lightning/lib/lightning/run_slam_offline",
+            "args": [
+                "--config",
+                "${workspaceFolder}/config/default_vbr.yaml",
+                "--input_bag",
+                "/media/kfusion/T/SlamDataList/VBR/campus/ros2.db3"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/../../",
+            "environment": [
+                {
+                    "name": "ROS_VERSION",
+                    "value": "2"
+                },
+                {
+                    "name": "ROS_PYTHON_VERSION",
+                    "value": "3"
+                },
+                {
+                    "name": "ROS_DISTRO",
+                    "value": "humble"
+                },
+                {
+                    "name": "ROS_LOCALHOST_ONLY",
+                    "value": "0"
+                },
+                {
+                    "name": "AMENT_PREFIX_PATH",
+                    "value": "${workspaceFolder}/../../install/lightning:/opt/ros/humble"
+                },
+                {
+                    "name": "CMAKE_PREFIX_PATH",
+                    "value": "${workspaceFolder}/../../install/lightning:/opt/ros/humble"
+                },
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "${workspaceFolder}/../../install/lightning/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib"
+                },
+                {
+                    "name": "PYTHONPATH",
+                    "value": "${workspaceFolder}/../../install/lightning/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages"
+                },
+                {
+                    "name": "PATH",
+                    "value": "${workspaceFolder}/../../install/lightning/bin:/opt/ros/humble/bin:${env:PATH}"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build ROS2 Debug",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "sourceFileMap": {
+                "/build": "${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Run SLAM Offline (No Debug)",
             "type": "node-terminal",
             "request": "launch",
             "command": "${workspaceFolder}/run_offline.sh",
