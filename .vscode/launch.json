@@ -64,13 +64,25 @@
                     "description": "Set Disassembly Flavor to Intel",
                     "text": "-gdb-set disassembly-flavor intel",
                     "ignoreFailures": true
+                },
+                {
+                    "description": "Disable auto-loading of .gdbinit",
+                    "text": "-gdb-set auto-load safe-path /",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set breakpoint pending on",
+                    "text": "-gdb-set breakpoint pending on",
+                    "ignoreFailures": false
                 }
             ],
+            "logging": {
+                "engineLogging": true,
+                "trace": true,
+                "traceResponse": true
+            },
             "preLaunchTask": "Build ROS2 Debug",
-            "miDebuggerPath": "/usr/bin/gdb",
-            "sourceFileMap": {
-                "/build": "${workspaceFolder}"
-            }
+            "miDebuggerPath": "/usr/bin/gdb"
         },
         {
             "name": "Run SLAM Offline (No Debug)",
